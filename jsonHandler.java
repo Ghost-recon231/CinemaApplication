@@ -1,57 +1,44 @@
 
 import java.io.StringWriter;
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.*;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonWriter;
+import javax.json.*;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
  * @author bihunjakub
  */
 public class JsonHandler {
+    private static JsonHandler instance;
     
-    public void test(){
-          getSQL();
+    private JsonHandler(){}
+    
+    public static JsonHandler getInstance(){
+        if (instance == null){
+            instance = new JsonHandler();
+        }
+        return instance;
     }
-    
-    public void getSQL(){
-        try { 
-            Class.forName("org.sqlite.JDBC"); 
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:Kino_Ref.sqlite"); 
-            Statement stat = conn.createStatement(); 
-            String sql = "select * from Film"; 
-            ResultSet rs = stat.executeQuery(sql);
-            
-            System.out.println(json.toString());
-            rs.close(); 
-            conn.close(); 
-        } catch (Exception e) { 
-            System.out.println(e.toString()); 
-        }  
-    }
-    
-    public String jsonToString(JsonObject jsonObject){
+
+    public static String jsonToString(JsonObject jsonObject){
         StringWriter stringWriter = new StringWriter();
         JsonWriter jsonWriter = Json.createWriter(stringWriter);
           jsonWriter.writeObject(jsonObject);
           jsonWriter.close();
-          return stringWriter.toString();
+        return stringWriter.toString();
     }
     
-    public static JsonArray resultsetToJson(ResultSet rs){
-        try{
+    public static JsonArray resultSetToJson(ResultSet rs){
+         try{
             ResultSetMetaData meta = rs.getMetaData();
             int columnCount = meta.getColumnCount();
-
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-
             while (rs.next()) {
                 JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
 
@@ -79,6 +66,7 @@ public class JsonHandler {
         
         } catch (Exception e) { 
           System.out.println(e.toString()); 
-        }  
+        }
+        return Json.createArrayBuilder().build();
     }
 }
