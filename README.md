@@ -9,7 +9,8 @@ KinoMVC/
     ├── Main.java                        # Einstiegspunkt
     │
     ├── model/                           # MODEL Layer
-    │   └── Buchung.java
+    │   ├── JsonHandler.java             # Translates SQL Resultsets into JSON
+    │   └── SQLAccess.java               # Acesses the DB with prepared Statemnets/queries etc.
     │
     ├── view/                            # VIEW Layer
     │   ├── MainFrame.java               # Hauptfenster
