@@ -13,7 +13,7 @@ import java.sql.*;
  */
 public class DBAccess {
     private static DBAccess instance;
-    private String databaseName = "Kino_Ref.sqlite";
+    private String databaseName = "Kino.sqlite";
     public static JsonHandler json = JsonHandler.getInstance();
     
     
