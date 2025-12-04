@@ -24,3 +24,6 @@ KinoMVC/
     │
     └── database/                        # Datenbankzugriff
         └── DatabaseManager.java
+
+
+    the new changes
